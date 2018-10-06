@@ -36,6 +36,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var sunriseSunsetView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
+        // Hide all views (except for activity indicator) while we are requesting the user's weather data
         setViewsHidden(true)
     }
     
@@ -48,9 +49,13 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func viewDidLoad() {
+        // Determine weather we will be using CoreLocation or just the user's zip code
+        
         if locationManager != nil {
+            
             locationManager?.delegate = self
             locationManager?.startUpdatingLocation()
+            
         } else if zipCode != nil {
             
             retrieveWeather(withZipCode: zipCode!)
@@ -61,16 +66,23 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func retrieveWeather(withLatitude lat: Double, withLongitude lon: Double) {
+        // This calls OWM's API with latitude and longitude information from CoreLocation
+        
         let apiURL = "\(owmAPIURL)?lat=\(lat)&lon=\(lon)&APPID=\(owmAPIKey)"
         callAPI(withURL: apiURL, withCallback: loadWeatherIntoView)
     }
     
     private func retrieveWeather(withZipCode zip: Int) {
+        // Requests weather data using the user's zip code
+        // At this time, this only is set to recognize U.S. zip codes
+        
         let apiURL = "\(owmAPIURL)?zip=\(zip)&APPID=\(owmAPIKey)"
         callAPI(withURL: apiURL, withCallback: loadWeatherIntoView)
     }
     
     private func loadWeatherIntoView() {
+        // Load all the data obtained from OWM into the view
+        
         if let data = weatherData {
             cityName.text = data.cityName
             weatherIcon.text = data.icon
@@ -100,13 +112,22 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 let json = JSON(value)
                 self.weatherData = WeatherModel(json)
                 
+                // If cityName is nil, chances are we got an error message from OWM
+                // If the response contains such a message, display it to the user
                 if self.weatherData!.cityName == "" {
                     print(json)
                     
                     if let msg = json["message"].string {
-                        self.showErrorAlertAndDismiss(msg.lowercased())
+                        // If the error contains something related to the zip code
+                        // we shouldn't offer to retry and instead send the user
+                        // back to re-enter their zip code
+                        if msg.range(of: "city not found") != nil {
+                            self.showErrorAlert("invalid zip code", shouldRetry: false)
+                        }
+                        
+                        self.showErrorAlert(msg.lowercased(), shouldRetry: true)
                     } else {
-                        self.showErrorAlertAndDismiss("not a clue what happened")
+                        self.showErrorAlert("not a clue what happened", shouldRetry: true)
                     }
                     
                     return
@@ -116,7 +137,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 cb()
                 
             case .failure(let error):
-                self.showErrorAlertAndDismiss(error.localizedDescription.lowercased())
+                // If there was a network error, we will display it to the user and dismiss the ViewController
+                
+                self.showErrorAlert(error.localizedDescription.lowercased(), shouldRetry: true)
                 print(error)
             }
         }
@@ -130,18 +153,26 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        showErrorAlertAndDismiss(error.localizedDescription.lowercased())
+        showErrorAlert(error.localizedDescription.lowercased(), shouldRetry: true)
     }
     
-    func showErrorAlertAndDismiss(_ message: String) {
+    func showErrorAlert(_ message: String, shouldRetry: Bool) {
         let fullMessage = "Oops! There was an issue getting weather data. Our weatherman said: \(message)"
         
         let alert = UIAlertController(title: "Unable to get weather", message: fullMessage, preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            self.dismiss(animated: true)
-        }))
-        
+        if shouldRetry {
+            alert.addAction(UIAlertAction(title: "Retry", style: .default, handler: { _ in
+                self.hasLoadedWeather = false
+                self.weatherData = nil
+                
+                self.viewDidLoad()
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.dismiss(animated: true)
+            }))
+        }
         self.present(alert, animated: true)
     }
 }

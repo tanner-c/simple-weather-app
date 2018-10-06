@@ -32,6 +32,9 @@ class InitialViewController: UIViewController {
     func determineAppropriateSegue() {
         //TODO: Check if the user already entered their ZIP
         
+        // Determine whether the user has authorized us to use their location
+        // If they have, move straight to WeatherController which will request location
+        // If they havent, display a controller which will ask the user for their zip code
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse, .authorizedAlways:
             performSegue(withIdentifier: "initialToWeather", sender: self)

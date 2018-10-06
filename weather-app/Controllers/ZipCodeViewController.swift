@@ -23,6 +23,8 @@ class ZipCodeViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // This is used to prevent the user from entering more than 5 characters into the ZIP field
+        // Because Apple doesn't have a built in property in UITextField for this
         let currentCount = textField.text?.count ?? 0
         
         if range.length + range.location > currentCount {
