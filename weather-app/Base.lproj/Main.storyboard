@@ -23,72 +23,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebW-ft-5Cb">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nbx-0J-QdL" userLabel="Top View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="661"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="900-6K-3Qk">
-                                                <rect key="frame" x="0.0" y="301" width="414" height="59"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="50"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="900-6K-3Qk" firstAttribute="centerY" secondItem="Nbx-0J-QdL" secondAttribute="centerY" id="IxI-DF-WgJ"/>
-                                            <constraint firstAttribute="trailing" secondItem="900-6K-3Qk" secondAttribute="trailing" id="bnG-Bf-ky8"/>
-                                            <constraint firstItem="900-6K-3Qk" firstAttribute="leading" secondItem="Nbx-0J-QdL" secondAttribute="leading" id="jXq-oo-ud6"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slG-9u-vsN" userLabel="Bottom View">
-                                        <rect key="frame" x="0.0" y="662" width="414" height="200"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="GeU-KJ-spN">
-                                                <rect key="frame" x="63" y="57" width="288" height="86"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
-                                                <inset key="contentEdgeInsets" minX="25" minY="25" maxX="25" maxY="25"/>
-                                                <state key="normal" title="Get Started">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="getStartedPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gO0-00-iaS"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="GeU-KJ-spN" firstAttribute="top" secondItem="slG-9u-vsN" secondAttribute="top" constant="57" id="1Ai-gZ-EJv"/>
-                                            <constraint firstItem="GeU-KJ-spN" firstAttribute="leading" secondItem="slG-9u-vsN" secondAttribute="leading" constant="63" id="T5o-VG-FHX"/>
-                                            <constraint firstItem="GeU-KJ-spN" firstAttribute="centerX" secondItem="slG-9u-vsN" secondAttribute="centerX" id="ahP-yP-kYP"/>
-                                            <constraint firstItem="GeU-KJ-spN" firstAttribute="centerY" secondItem="slG-9u-vsN" secondAttribute="centerY" id="wiQ-4T-8Mh"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="slG-9u-vsN" firstAttribute="top" secondItem="Nbx-0J-QdL" secondAttribute="bottom" constant="1" id="87n-2I-wVV"/>
-                                    <constraint firstItem="Nbx-0J-QdL" firstAttribute="leading" secondItem="slG-9u-vsN" secondAttribute="leading" id="Jd3-EQ-APc"/>
-                                    <constraint firstItem="Nbx-0J-QdL" firstAttribute="trailing" secondItem="slG-9u-vsN" secondAttribute="trailing" id="RLx-xR-C1Y"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nbx-0J-QdL" secondAttribute="trailing" id="du0-Bl-Re9"/>
-                                    <constraint firstItem="Nbx-0J-QdL" firstAttribute="leading" secondItem="ebW-ft-5Cb" secondAttribute="leading" id="fSx-8L-Uj9"/>
-                                    <constraint firstItem="Nbx-0J-QdL" firstAttribute="top" secondItem="ebW-ft-5Cb" secondAttribute="top" id="kYE-Ip-Rgc"/>
-                                    <constraint firstAttribute="bottom" secondItem="slG-9u-vsN" secondAttribute="bottom" id="rfW-sV-v6t"/>
-                                </constraints>
-                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="eD9-JI-RVb">
+                                <rect key="frame" x="188.66666666666666" y="429.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ebW-ft-5Cb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="IEF-MM-PBQ"/>
-                            <constraint firstItem="ebW-ft-5Cb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Vyk-uo-bRy"/>
-                            <constraint firstAttribute="trailing" secondItem="ebW-ft-5Cb" secondAttribute="trailing" id="hfD-OU-YUn"/>
-                            <constraint firstItem="ebW-ft-5Cb" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="kOt-2H-LHS"/>
+                            <constraint firstItem="eD9-JI-RVb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BRj-og-1yo"/>
+                            <constraint firstItem="eD9-JI-RVb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uj4-3j-3xH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

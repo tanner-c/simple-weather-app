@@ -23,7 +23,13 @@ class InitialViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
     
-    @IBAction func getStartedPressed(_ sender: Any) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        determineAppropriateSegue()
+    }
+    
+    func determineAppropriateSegue() {
         //TODO: Check if the user already entered their ZIP
         
         switch CLLocationManager.authorizationStatus() {
