@@ -137,7 +137,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 cb()
                 
             case .failure(let error):
-                // If there was a network error, we will display it to the user and dismiss the ViewController
+                // If there was a network error, we will display it to the user and offer to try again
                 
                 self.showErrorAlert(error.localizedDescription.lowercased(), shouldRetry: true)
                 print(error)
