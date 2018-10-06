@@ -50,7 +50,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         if locationManager != nil {
             locationManager?.delegate = self
-            locationManager?.requestLocation()
+            locationManager?.startUpdatingLocation()
         } else if zipCode != nil {
             
             retrieveWeather(withZipCode: zipCode!)
@@ -125,6 +125,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if !hasLoadedWeather {
             retrieveWeather(withLatitude: locations[0].coordinate.latitude, withLongitude: locations[0].coordinate.longitude)
+            manager.stopUpdatingLocation()
         }
     }
     
